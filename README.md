@@ -1,7 +1,7 @@
 <html>
   <head>
     <meta charset="UTF-8" />
-    <title>Donation Stats</title>
+    <title></title>
     <style>
       body {
         background-color: #304674;
