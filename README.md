@@ -1,46 +1,52 @@
 <!DOCTYPE html>
-<html lang="th">
-<head>
-  <meta charset="UTF-8" />
-  <title>ยอดเงินบริจาค</title>
-  <style>
-    body {
-      background-color: #304674;
-      color: white;
-      font-family: Arial, sans-serif;
-      text-align: center;
-      padding: 50px;
-    }
-    .label { font-size: 22px; margin-top: 10px; }
-    .money { color: #00ff88; font-weight: bold; font-size: 28px; }
-  </style>
-</head>
-<body>
-  <h2>ยอดเงินบริจาคทั้งหมด</h2>
-  <div class="label">LAK:</div>
-  <div class="money" id="lak">Loading...</div>
-  <div class="label">USD:</div>
-  <div class="money" id="usd">Loading...</div>
-  <div class="label">THB:</div>
-  <div class="money" id="thb">Loading...</div>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <title>Donation Stats</title>
+    <style>
+      body {
+        background-color: #304674;
+        color: white;
+        font-family: Arial, sans-serif;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+      }
+      .label {
+        font-size: 22px;
+        margin-bottom: 4px;
+      }
+      .money {
+        font-size: 28px;
+        font-weight: bold;
+        color: #00ff88;
+        margin-bottom: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <div id="output">Loading...</div>
 
-  <script>
-    const scriptURL =
-      "https://script.google.com/macros/s/AKfycbyRRkVfsYFlgezwx5P8sjGjjQpw0B9kRK9KiUBee96yja0gddG6psPSuPdCRmd460M/exec";
-
-    fetch(scriptURL)
-      .then(res => res.json())
-      .then(data => {
-        document.getElementById("lak").textContent = data.LAK + " LAK";
-        document.getElementById("usd").textContent = data.USD + " USD";
-        document.getElementById("thb").textContent = data.THB + " THB";
-      })
-      .catch(err => {
-        console.error("Error loading data:", err);
-        document.getElementById("lak").textContent = "ไม่สามารถโหลดได้";
-        document.getElementById("usd").textContent = "-";
-        document.getElementById("thb").textContent = "-";
-      });
-  </script>
-</body>
+    <script>
+      fetch("https://script.google.com/macros/s/AKfycbyRRkVfsYFlgezwx5P8sjGjjQpw0B9kRK9KiUBee96yja0gddG6psPSuPdCRmd460M/exec")
+        .then(response => response.json())
+        .then(data => {
+          document.getElementById("output").innerHTML = `
+            <div class="label">Amount LAK:</div>
+            <div class="money">${data.LAK}</div>
+            <div class="label">Amount USD:</div>
+            <div class="money">${data.USD}</div>
+            <div class="label">Amount THB:</div>
+            <div class="money">${data.THB}</div>
+          `;
+        })
+        .catch(error => {
+          document.getElementById("output").innerHTML = "❌ Error loading data.";
+          console.error("Error:", error);
+        });
+    </script>
+  </body>
 </html>
