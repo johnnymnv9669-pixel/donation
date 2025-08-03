@@ -30,7 +30,7 @@
     <div id="output">Loading...</div>
 
     <script>
-      fetch("https://script.google.com/macros/s/AKfycbyRRkVfsYFlgezwx5P8sjGjjQpw0B9kRK9KiUBee96yja0gddG6psPSuPdCRmd460M/exec")
+      fetch("https://script.google.com/macros/s/AKfycbxmDsRgwZ2hgWd3rJqFvgLGBaRSvMNU9n0q4xaTQ_Lh-pGRqrtBJvyySXsb08AgKV-f/exec")
         .then(response => response.json())
         .then(data => {
           document.getElementById("output").innerHTML = `
